@@ -17,15 +17,16 @@ namespace MasterMazeXNA
 	 public class Game1: Microsoft.Xna.Framework.Game
 	 {
 		  //Constants
-		  private const int mWidth = 50;
-		  private const int mHeight = 50;
+		  private const int mWidth = 30;
+		  private const int mHeight = 30;
 
-		  //Graphic related constants
-		  private const int blockSize = 10;
-		  private const int blockBuffer = blockSize + 2;
+		  //Graphic related variables
+		  private const int blockSize = 15;
 		  private const int edgeBuffer = 5;
-		  private const int screenHeight = blockBuffer * mWidth + edgeBuffer*2;
-		  private const int screenWidth = blockBuffer * mHeight + edgeBuffer*2;
+		  private int screenHeight;
+		  private int screenWidth;
+		  private const double bufferPercent = .15;//Gets the percentage of the block buffer wanted.
+		  private int blockBuffer;//Is the literal integer for the block buffer amount.
 
 		  //basic variables
 		  private int[,] board = new int[mWidth, mHeight];
@@ -46,6 +47,11 @@ namespace MasterMazeXNA
 
 				//Set graphics settings
 				graphics.IsFullScreen = false;
+				//Graphics related processing.
+				blockBuffer = Convert.ToInt32((bufferPercent * blockSize) + blockSize);
+				screenHeight = blockBuffer * mWidth + edgeBuffer * 2;
+				screenWidth = blockBuffer * mHeight + edgeBuffer * 2;
+				//Continue setting graphics settings
 				graphics.PreferredBackBufferHeight = screenHeight;
 				graphics.PreferredBackBufferWidth = screenWidth;
 
@@ -62,7 +68,7 @@ namespace MasterMazeXNA
 		  protected override void Initialize()
 		  {
 				// TODO: Add your initialization logic here
-
+				
 
 				//Don't erase this
 				base.Initialize();
